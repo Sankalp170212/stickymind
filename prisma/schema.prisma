@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  notes        Note[]
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title     String?
+  content   String
+  category  String? // free-text tag, e.g. "work", "idea", "personal"
+
+  // canvas state — persisted exactly as the user leaves it
+  posX      Float    @default(100)
+  posY      Float    @default(100)
+  zIndex    Int      @default(1) // set once at creation, never reordered
+  color     String   @default("#FEF08A") // hex — one of 5 presets
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
