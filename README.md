@@ -71,13 +71,13 @@ Create a `.env` file in the root directory (refer to `.env.example`):
 
 ```bash
 # Database connection URL (PostgreSQL - Neon / Render Postgres / Local)
-DATABASE_URL="postgresql://user:password@localhost:5432/stickymind"
+DATABASE_URL
 
 # JWT Secret for signing auth tokens
-JWT_SECRET="stickymind_super_secret_jwt_key_2026_change_in_production"
+JWT_SECRET
 
 # Google Gemini API Key for AI note assistant (from Google AI Studio)
-GEMINI_API_KEY="your_gemini_api_key_here"
+GEMINI_API_KEY
 ```
 
 ---
